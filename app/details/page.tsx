@@ -4,13 +4,13 @@ import { useCryptoHistory } from "@/lib/hooks";
 import { getDataForLast30Days } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import {
-  LineChart,
-  Line,
   CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  Tooltip,
   XAxis,
   YAxis,
-  Tooltip,
-  Legend,
 } from "recharts";
 
 export default function CryptoDetails() {

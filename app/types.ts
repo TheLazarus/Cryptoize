@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type CryptoCurrency = {
   id: string;
   rank: string;
@@ -16,7 +18,7 @@ export type CryptoCurrency = {
 export type CryptoTableProps = {
   columns: ColumnConfig[];
   data: CryptoCurrency[];
-  setCryptoData: (data: CryptoCurrency[]) => void;
+  setCryptoData: Dispatch<SetStateAction<CryptoCurrency[]>>;
 };
 
 export type ColumnConfig = {

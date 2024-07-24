@@ -5,7 +5,7 @@ import {
   HistoryEntry,
   SortingOrder,
 } from "@/app/types";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { CRYPTO_DATA_URI, CRYPTO_WS_URI } from "./constants";
 import {
   favoriteCryptoInLS,
@@ -129,7 +129,7 @@ export const useCryptoHistory = (currency: string, interval: string) => {
 
 export const useRealtimePrices = (
   data: CryptoCurrency[],
-  setCryptoData: (data: CryptoCurrency[]) => void
+  setCryptoData: Dispatch<SetStateAction<CryptoCurrency[]>>
 ) => {
   useEffect(() => {
     const assetIds = data.reduce((acc, curr) => {
@@ -141,17 +141,20 @@ export const useRealtimePrices = (
 
     pricesConn.onmessage = function (msg) {
       const newPrices = JSON.parse(msg.data || "");
-      const updatedPrices = data.map((data) => {
-        const { id } = data || {};
 
-        if (!newPrices[id]) return data;
+      setCryptoData((data) => {
+        const updatedPrices = data.map((data) => {
+          const { id } = data || {};
 
-        return {
-          ...data,
-          priceUsd: newPrices[id],
-        };
+          if (!newPrices[id]) return data;
+
+          return {
+            ...data,
+            priceUsd: newPrices[id],
+          };
+        });
+        return updatedPrices;
       });
-      setCryptoData(updatedPrices);
     };
 
     return () => {
