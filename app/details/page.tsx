@@ -17,12 +17,9 @@ export default function CryptoDetails() {
   const params = useSearchParams();
   const id = params.get("id") || "";
 
-  console.log(id);
-
-  const { apiState, cryptoHistoryData } = useCryptoHistory(id, "d1");
+  const { cryptoHistoryData } = useCryptoHistory(id, "d1");
   const last30DaysData = getDataForLast30Days(cryptoHistoryData);
 
-  console.log(last30DaysData);
   return (
     <main className="min-h-screen grid justify-center p-10">
       <h1 className="text-3xl text-center">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, JetBrains_Mono, Rubik_Mono_One } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 
 const font = JetBrains_Mono({ subsets: ["latin"], weight: "400" });
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <Suspense>{children}</Suspense>
+      </body>
     </html>
   );
 }
