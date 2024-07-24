@@ -13,4 +13,10 @@ export type CryptoCurrency = {
   explorer: string;
 };
 
+export type CryptoTableProps = {
+  title?: string;
+  columns: string[];
+  data: CryptoCurrency[];
+};
 
+export type ApiState = "LOADING" | "ERROR" | "SUCCESS";
