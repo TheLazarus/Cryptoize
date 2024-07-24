@@ -1,7 +1,7 @@
 import { CryptoCurrency, HistoryEntry } from "@/app/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { CRYPTO_TABLE, FAVORITES_LS_KEY } from "./constants";
+import { CRYPTO_TABLE, CRYPTO_FAVORITES_LS_KEY } from "./constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -21,9 +21,12 @@ export const getPaginatedData = (
 };
 
 export const favoriteCryptoInLS = (symbol: string) => {
-  const favoritesData = localStorage.getItem(FAVORITES_LS_KEY);
+  const favoritesData = localStorage.getItem(CRYPTO_FAVORITES_LS_KEY);
   if (!favoritesData) {
-    localStorage.setItem(FAVORITES_LS_KEY, JSON.stringify({ [symbol]: true }));
+    localStorage.setItem(
+      CRYPTO_FAVORITES_LS_KEY,
+      JSON.stringify({ [symbol]: true })
+    );
     return;
   }
 
@@ -31,21 +34,21 @@ export const favoriteCryptoInLS = (symbol: string) => {
 
   if (!parsedData[symbol]) {
     localStorage.setItem(
-      FAVORITES_LS_KEY,
+      CRYPTO_FAVORITES_LS_KEY,
       JSON.stringify({ ...parsedData, [symbol]: true })
     );
     return;
   }
 
   localStorage.setItem(
-    FAVORITES_LS_KEY,
+    CRYPTO_FAVORITES_LS_KEY,
     JSON.stringify({ ...parsedData, [symbol]: false })
   );
   return;
 };
 
 export const getFavorites = () => {
-  const favoritesData = localStorage.getItem(FAVORITES_LS_KEY);
+  const favoritesData = localStorage.getItem(CRYPTO_FAVORITES_LS_KEY);
 
   if (!favoritesData) return {};
 
@@ -53,7 +56,7 @@ export const getFavorites = () => {
 };
 
 export const getCryptoHistoryEndpoint = (
-  currency: string,
+currency: string,
   interval: string
 ) => {
   return `https://api.coincap.io/v2/assets/${currency}/history?interval=${interval}`;

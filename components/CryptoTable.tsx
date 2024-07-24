@@ -1,6 +1,11 @@
 import { ColumnsToSort, CryptoTableProps } from "@/app/types";
 import { CRYPTO_TABLE } from "@/lib/constants";
-import { useFavorites, usePagination, useSorting } from "@/lib/hooks";
+import {
+  useFavorites,
+  usePagination,
+  useRealtimePrices,
+  useSorting,
+} from "@/lib/hooks";
 import { getPaginatedData } from "@/lib/utils";
 import {
   ChevronLeft,
@@ -34,6 +39,8 @@ export default function CryptoTable({
   const dataToRender = getPaginatedData(data, currentPage);
   const showPrevButton = currentPage > 0;
   const showNextButton = currentPage < CRYPTO_TABLE.TOTAL_PAGES - 1;
+
+  useRealtimePrices(data, setCryptoData);
 
   return (
     <div>

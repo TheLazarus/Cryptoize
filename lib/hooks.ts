@@ -6,7 +6,7 @@ import {
   SortingOrder,
 } from "@/app/types";
 import { useEffect, useState } from "react";
-import { CRYPTO_DATA_URI } from "./constants";
+import { CRYPTO_DATA_URI, CRYPTO_WS_URI } from "./constants";
 import {
   favoriteCryptoInLS,
   getCryptoHistoryEndpoint,
@@ -125,4 +125,37 @@ export const useCryptoHistory = (currency: string, interval: string) => {
   }, []);
 
   return { cryptoHistoryData, apiState, setCryptoHistoryData };
+};
+
+export const useRealtimePrices = (
+  data: CryptoCurrency[],
+  setCryptoData: (data: CryptoCurrency[]) => void
+) => {
+  useEffect(() => {
+    const assetIds = data.reduce((acc, curr) => {
+      acc = acc ? `${acc},${curr.id}` : curr.id;
+
+      return acc;
+    }, "");
+    const pricesConn = new WebSocket(`${CRYPTO_WS_URI}?assets=${assetIds}`);
+
+    pricesConn.onmessage = function (msg) {
+      const newPrices = JSON.parse(msg.data || "");
+      const updatedPrices = data.map((data) => {
+        const { id } = data || {};
+
+        if (!newPrices[id]) return data;
+
+        return {
+          ...data,
+          priceUsd: newPrices[id],
+        };
+      });
+      setCryptoData(updatedPrices);
+    };
+
+    return () => {
+      pricesConn.close();
+    };
+  }, []);
 };
