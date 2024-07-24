@@ -14,7 +14,6 @@ export type CryptoCurrency = {
 };
 
 export type CryptoTableProps = {
-  title?: string;
   columns: string[];
   data: CryptoCurrency[];
 };

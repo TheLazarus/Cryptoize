@@ -1,6 +1,7 @@
 import { ApiState, CryptoCurrency } from "@/app/types";
 import { useEffect, useState } from "react";
 import { CRYPTO_DATA_URI } from "./constants";
+import { favoriteCryptoInLS, getFavorites } from "./utils";
 
 export const usePagination = (totalPages: number) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -46,4 +47,19 @@ export const useCryptoData = () => {
   }, []);
 
   return { cryptoData, apiState };
+};
+
+export const useFavorites = () => {
+  const [favorites, setFavorites] = useState(getFavorites);
+
+  const toggleFavorite = (symbol: string): void => {
+    const newFavorites = {
+      ...favorites,
+      [symbol]: !favorites[symbol],
+    };
+    setFavorites(newFavorites);
+    favoriteCryptoInLS(symbol);
+  };
+
+  return { favorites, toggleFavorite };
 };

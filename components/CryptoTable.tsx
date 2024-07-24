@@ -1,26 +1,28 @@
 import { CryptoTableProps } from "@/app/types";
-import { Heart, Link } from "lucide-react";
+import { CRYPTO_TABLE } from "@/lib/constants";
+import { usePagination, useFavorites } from "@/lib/hooks";
+import { getPaginatedData } from "@/lib/utils";
+import { Heart } from "lucide-react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { CRYPTO_TABLE } from "@/lib/constants";
-import { usePagination } from "@/lib/hooks";
-import { favoriteCrypto, getPaginatedData } from "@/lib/utils";
 
 export default function CryptoTable({
-  title = CRYPTO_TABLE.TITLE,
   columns = [],
   data = [],
 }: CryptoTableProps) {
   const { currentPage, goToNextPage, goToPrevPage } = usePagination(
     CRYPTO_TABLE.TOTAL_PAGES
   );
+
+  const { favorites, toggleFavorite } = useFavorites();
+
+  console.log(favorites);
 
   const dataToRender = getPaginatedData(data, currentPage);
   const showPrevButton = currentPage > 0;
@@ -29,7 +31,6 @@ export default function CryptoTable({
   return (
     <div>
       <Table>
-        <TableCaption>{title}</TableCaption>
         <TableHeader>
           <TableRow>
             {columns.map((columnName) => (
@@ -46,14 +47,17 @@ export default function CryptoTable({
             const formattedPrice = `$${parseFloat(priceUsd)}`;
             const formattedMarketCap = `${parseFloat(marketCapUsd)}`;
 
+            const isFavorite = favorites[symbol] ?? false;
+
             return (
               <TableRow key={name}>
                 <TableCell className="font-medium flex gap-5">
-                  {symbol}
                   <Heart
                     className="cursor-pointer"
-                    onClick={() => favoriteCrypto(symbol)}
+                    onClick={() => toggleFavorite(symbol)}
+                    {...(isFavorite ? { fill: "red", stroke: "none" } : {})}
                   />
+                  {symbol}
                 </TableCell>
 
                 <TableCell>{name}</TableCell>
