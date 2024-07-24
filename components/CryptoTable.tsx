@@ -1,15 +1,16 @@
 import { ColumnsToSort, CryptoTableProps } from "@/app/types";
 import { CRYPTO_TABLE } from "@/lib/constants";
-import { usePagination, useFavorites, useSorting } from "@/lib/hooks";
+import { useFavorites, usePagination, useSorting } from "@/lib/hooks";
 import { getPaginatedData } from "@/lib/utils";
 import {
+  ChevronLeft,
+  ChevronRight,
   Heart,
   MoveDown,
   MoveUp,
   MoveVertical,
-  ChevronRight,
-  ChevronLeft,
 } from "lucide-react";
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -18,7 +19,6 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import Link from "next/link";
 
 export default function CryptoTable({
   columns = [],
@@ -37,6 +37,16 @@ export default function CryptoTable({
 
   return (
     <div>
+      <div className="flex justify-end">
+        <div className="flex gap-4">
+          <button onClick={goToPrevPage} disabled={!showPrevButton}>
+            <ChevronLeft stroke={showPrevButton ? "black" : "gray"} />
+          </button>
+          <button onClick={goToNextPage} disabled={!showNextButton}>
+            <ChevronRight stroke={showNextButton ? "black" : "gray"} />
+          </button>
+        </div>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>
@@ -106,20 +116,6 @@ export default function CryptoTable({
           })}
         </TableBody>
       </Table>
-
-      <div className="flex justify-between">
-        <h2 className="text-[1rem]">
-          Page {currentPage + 1} / {CRYPTO_TABLE.TOTAL_PAGES}
-        </h2>
-        <div className="flex gap-4">
-          <button onClick={goToPrevPage} disabled={!showPrevButton}>
-            <ChevronLeft stroke={showPrevButton ? "black" : "gray"} />
-          </button>
-          <button onClick={goToNextPage} disabled={!showNextButton}>
-            <ChevronRight stroke={showNextButton ? "black" : "gray"} />
-          </button>
-        </div>
-      </div>
     </div>
   );
 }

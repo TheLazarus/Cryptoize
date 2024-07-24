@@ -13,7 +13,7 @@ export default function CryptoDetails() {
   }
 
   if (apiState === "LOADING") {
-    return <Loader />;
+    return <Loader className="m-auto" />;
   }
 
   if (!cryptoData) return null;
