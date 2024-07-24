@@ -5,7 +5,6 @@ import { useCryptoData } from "@/lib/hooks";
 import { Loader } from "lucide-react";
 import CryptoTable from "./CryptoTable";
 
-
 export default function CryptoDetails() {
   const { cryptoData, apiState, setCryptoData } = useCryptoData();
 

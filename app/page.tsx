@@ -1,5 +1,5 @@
 import CryptoDetails from "@/components/CryptoDetails";
-import { Bitcoin, HeartIcon } from "lucide-react";
+import { Bitcoin } from "lucide-react";
 
 export default function Home() {
   return (

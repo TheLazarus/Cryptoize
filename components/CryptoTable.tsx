@@ -109,19 +109,15 @@ export default function CryptoTable({
 
       <div className="flex justify-between">
         <h2 className="text-[1rem]">
-          Page {currentPage + 1} out of {CRYPTO_TABLE.TOTAL_PAGES}
+          Page {currentPage + 1} / {CRYPTO_TABLE.TOTAL_PAGES}
         </h2>
         <div className="flex gap-4">
-          {showPrevButton && (
-            <button onClick={goToPrevPage}>
-              <ChevronLeft />
-            </button>
-          )}
-          {showNextButton && (
-            <button onClick={goToNextPage}>
-              <ChevronRight />
-            </button>
-          )}
+          <button onClick={goToPrevPage} disabled={!showPrevButton}>
+            <ChevronLeft stroke={showPrevButton ? "black" : "gray"} />
+          </button>
+          <button onClick={goToNextPage} disabled={!showNextButton}>
+            <ChevronRight stroke={showNextButton ? "black" : "gray"} />
+          </button>
         </div>
       </div>
     </div>

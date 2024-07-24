@@ -3,7 +3,7 @@ import { JetBrains_Mono } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 
-const font = JetBrains_Mono({ subsets: ["latin"], weight: "400" });
+const font = JetBrains_Mono({ subsets: ["latin"], weight: ["100", "200", "300"] });
 
 export const metadata: Metadata = {
   title: "Cryptoize",
