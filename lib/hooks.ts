@@ -129,7 +129,7 @@ export const useCryptoHistory = (currency: string, interval: string) => {
 
 export const useRealtimePrices = (
   data: CryptoCurrency[],
-  setCryptoData: Dispatch<SetStateAction<CryptoCurrency[]>>
+  setCryptoData: Dispatch<SetStateAction<CryptoCurrency[] | null>>
 ) => {
   useEffect(() => {
     const assetIds = data.reduce((acc, curr) => {
@@ -143,6 +143,8 @@ export const useRealtimePrices = (
       const newPrices = JSON.parse(msg.data || "");
 
       setCryptoData((data) => {
+        if (!data) return data;
+
         const updatedPrices = data.map((data) => {
           const { id } = data || {};
 

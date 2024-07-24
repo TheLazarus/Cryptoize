@@ -18,7 +18,7 @@ export type CryptoCurrency = {
 export type CryptoTableProps = {
   columns: ColumnConfig[];
   data: CryptoCurrency[];
-  setCryptoData: Dispatch<SetStateAction<CryptoCurrency[]>>;
+  setCryptoData: Dispatch<SetStateAction<CryptoCurrency[] | null>>;
 };
 
 export type ColumnConfig = {
