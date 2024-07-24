@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import Link from "next/link";
 
 export default function CryptoTable({
   columns = [],
@@ -64,7 +65,7 @@ export default function CryptoTable({
         </TableHeader>
         <TableBody>
           {dataToRender.map((data) => {
-            const { symbol, name, priceUsd, marketCapUsd } = data || {};
+            const { id, symbol, name, priceUsd, marketCapUsd } = data || {};
 
             const formattedPrice = `$${parseFloat(priceUsd).toFixed(4)}`;
             const formattedMarketCap = `${parseFloat(marketCapUsd).toFixed(4)}`;
@@ -82,7 +83,11 @@ export default function CryptoTable({
                   {symbol}
                 </TableCell>
 
-                <TableCell>{name}</TableCell>
+                <TableCell>
+                  <Link href={{ pathname: "/details", query: { id } }}>
+                    {name}
+                  </Link>
+                </TableCell>
                 <TableCell>{formattedPrice}</TableCell>
                 <TableCell className="text-right">
                   {formattedMarketCap}

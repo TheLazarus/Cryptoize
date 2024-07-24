@@ -24,6 +24,12 @@ export type ColumnConfig = {
   value: string;
 };
 
+export type HistoryEntry = {
+  priceUsd: string;
+  time: number;
+  date: string;
+};
+
 export type ColumnsToSort = keyof Pick<CryptoCurrency, "symbol" | "name">;
 
 export type SortingOrder = "INCREASING" | "DECREASING";

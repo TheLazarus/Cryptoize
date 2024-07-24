@@ -1,4 +1,4 @@
-import { CryptoCurrency } from "@/app/types";
+import { CryptoCurrency, HistoryEntry } from "@/app/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { CRYPTO_TABLE, FAVORITES_LS_KEY } from "./constants";
@@ -50,4 +50,19 @@ export const getFavorites = () => {
   if (!favoritesData) return {};
 
   return JSON.parse(favoritesData);
+};
+
+export const getCryptoHistoryEndpoint = (
+  currency: string,
+  interval: string
+) => {
+  return `https://api.coincap.io/v2/assets/${currency}/history?interval=${interval}`;
+};
+
+export const getDataForLast30Days = (historyData: HistoryEntry[] | null) => {
+  if (!historyData || !historyData.length) return [];
+
+  const length = historyData.length;
+
+  return historyData.slice(length - 30, length);
 };

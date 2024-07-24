@@ -2,11 +2,16 @@ import {
   ApiState,
   ColumnsToSort,
   CryptoCurrency,
+  HistoryEntry,
   SortingOrder,
 } from "@/app/types";
 import { useEffect, useState } from "react";
 import { CRYPTO_DATA_URI } from "./constants";
-import { favoriteCryptoInLS, getFavorites } from "./utils";
+import {
+  favoriteCryptoInLS,
+  getCryptoHistoryEndpoint,
+  getFavorites,
+} from "./utils";
 
 export const usePagination = (totalPages: number) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -90,4 +95,32 @@ export const useSorting = () => {
   };
 
   return { currentColumn, currentOrder, sortData };
+};
+
+export const useCryptoHistory = (currency: string, interval: string) => {
+  const [cryptoHistoryData, setCryptoHistoryData] = useState<
+    HistoryEntry[] | null
+  >(null);
+  const [apiState, setApiState] = useState<ApiState | null>(null);
+
+  useEffect(() => {
+    async function getCryptoHistory() {
+      try {
+        setApiState("LOADING");
+        const response = await fetch(
+          getCryptoHistoryEndpoint(currency, interval)
+        );
+        const parsedResponse = await response.json();
+        const { data = [] } = parsedResponse || {};
+        setCryptoHistoryData(data);
+        setApiState("SUCCESS");
+      } catch (error) {
+        setApiState("ERROR");
+      }
+    }
+
+    getCryptoHistory();
+  }, []);
+
+  return { cryptoHistoryData, apiState, setCryptoHistoryData };
 };

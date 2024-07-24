@@ -12,3 +12,4 @@ export const CRYPTO_TABLE = {
 export const FAVORITES_LS_KEY = "cc_favorites";
 
 export const CRYPTO_DATA_URI = "https://api.coincap.io/v2/assets";
+
