@@ -2,7 +2,14 @@ import { ColumnsToSort, CryptoTableProps } from "@/app/types";
 import { CRYPTO_TABLE } from "@/lib/constants";
 import { usePagination, useFavorites, useSorting } from "@/lib/hooks";
 import { getPaginatedData } from "@/lib/utils";
-import { Heart, MoveDown, MoveUp, MoveVertical } from "lucide-react";
+import {
+  Heart,
+  MoveDown,
+  MoveUp,
+  MoveVertical,
+  ChevronRight,
+  ChevronLeft,
+} from "lucide-react";
 import {
   Table,
   TableBody,
@@ -43,7 +50,7 @@ export default function CryptoTable({
               }
               return (
                 <TableHead
-                  className="w-[100px] last:text-right"
+                  className="w-[100px] last:text-right relative"
                   key={value}
                   onClick={() => {
                     setCurrentPage(0);
@@ -51,12 +58,14 @@ export default function CryptoTable({
                   }}
                 >
                   {label}
-                  {currentColumn !== value && <MoveVertical />}
+                  {currentColumn !== value && (
+                    <MoveVertical className="absolute right-0" />
+                  )}
                   {currentColumn === value && currentOrder === "INCREASING" && (
-                    <MoveDown />
+                    <MoveDown className="absolute right-0" />
                   )}
                   {currentColumn === value && currentOrder === "DECREASING" && (
-                    <MoveUp />
+                    <MoveUp className="absolute right-0" />
                   )}
                 </TableHead>
               );
@@ -98,12 +107,22 @@ export default function CryptoTable({
         </TableBody>
       </Table>
 
-      <div className="">
-        <h2>
+      <div className="flex justify-between">
+        <h2 className="text-[1rem]">
           Page {currentPage + 1} out of {CRYPTO_TABLE.TOTAL_PAGES}
         </h2>
-        {showPrevButton && <button onClick={goToPrevPage}>Prev</button>}
-        {showNextButton && <button onClick={goToNextPage}>Next</button>}
+        <div className="flex gap-4">
+          {showPrevButton && (
+            <button onClick={goToPrevPage}>
+              <ChevronLeft />
+            </button>
+          )}
+          {showNextButton && (
+            <button onClick={goToNextPage}>
+              <ChevronRight />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
