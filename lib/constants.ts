@@ -1,7 +1,12 @@
 export const CRYPTO_TABLE = {
   TOTAL_PAGES: 10,
   PAGE_LIMIT: 10,
-  COLUMNS: ["Symbol", "Name", "Price", "Market Cap"],
+  COLUMNS: [
+    { label: "Symbol", value: "symbol" },
+    { label: "Name", value: "name" },
+    { label: "Price", value: "price" },
+    { label: "Market Cap", value: "marketCapUsd" },
+  ],
 };
 
 export const FAVORITES_LS_KEY = "cc_favorites";

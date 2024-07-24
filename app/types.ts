@@ -14,8 +14,18 @@ export type CryptoCurrency = {
 };
 
 export type CryptoTableProps = {
-  columns: string[];
+  columns: ColumnConfig[];
   data: CryptoCurrency[];
+  setCryptoData: (data: CryptoCurrency[]) => void;
 };
+
+export type ColumnConfig = {
+  label: string;
+  value: string;
+};
+
+export type ColumnsToSort = keyof Pick<CryptoCurrency, "symbol" | "name">;
+
+export type SortingOrder = "INCREASING" | "DECREASING";
 
 export type ApiState = "LOADING" | "ERROR" | "SUCCESS";

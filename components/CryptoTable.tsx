@@ -1,8 +1,8 @@
-import { CryptoTableProps } from "@/app/types";
+import { ColumnsToSort, CryptoTableProps } from "@/app/types";
 import { CRYPTO_TABLE } from "@/lib/constants";
-import { usePagination, useFavorites } from "@/lib/hooks";
+import { usePagination, useFavorites, useSorting } from "@/lib/hooks";
 import { getPaginatedData } from "@/lib/utils";
-import { Heart } from "lucide-react";
+import { Heart, MoveDown, MoveUp, MoveVertical } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -15,14 +15,13 @@ import {
 export default function CryptoTable({
   columns = [],
   data = [],
+  setCryptoData,
 }: CryptoTableProps) {
-  const { currentPage, goToNextPage, goToPrevPage } = usePagination(
-    CRYPTO_TABLE.TOTAL_PAGES
-  );
+  const { currentPage, goToNextPage, goToPrevPage, setCurrentPage } =
+    usePagination(CRYPTO_TABLE.TOTAL_PAGES);
 
   const { favorites, toggleFavorite } = useFavorites();
-
-  console.log(favorites);
+  const { currentColumn, currentOrder, sortData } = useSorting();
 
   const dataToRender = getPaginatedData(data, currentPage);
   const showPrevButton = currentPage > 0;
@@ -33,25 +32,48 @@ export default function CryptoTable({
       <Table>
         <TableHeader>
           <TableRow>
-            {columns.map((columnName) => (
-              <TableHead className="w-[100px] last:text-right" key={columnName}>
-                {columnName}
-              </TableHead>
-            ))}
+            {columns.map(({ label, value }) => {
+              if (!["symbol", "name"].includes(value)) {
+                return (
+                  <TableHead className="w-[100px] last:text-right" key={value}>
+                    {label}
+                  </TableHead>
+                );
+              }
+              return (
+                <TableHead
+                  className="w-[100px] last:text-right"
+                  key={value}
+                  onClick={() => {
+                    setCurrentPage(0);
+                    setCryptoData(sortData(value as ColumnsToSort, data));
+                  }}
+                >
+                  {label}
+                  {currentColumn !== value && <MoveVertical />}
+                  {currentColumn === value && currentOrder === "INCREASING" && (
+                    <MoveDown />
+                  )}
+                  {currentColumn === value && currentOrder === "DECREASING" && (
+                    <MoveUp />
+                  )}
+                </TableHead>
+              );
+            })}
           </TableRow>
         </TableHeader>
         <TableBody>
           {dataToRender.map((data) => {
             const { symbol, name, priceUsd, marketCapUsd } = data || {};
 
-            const formattedPrice = `$${parseFloat(priceUsd)}`;
-            const formattedMarketCap = `${parseFloat(marketCapUsd)}`;
+            const formattedPrice = `$${parseFloat(priceUsd).toFixed(4)}`;
+            const formattedMarketCap = `${parseFloat(marketCapUsd).toFixed(4)}`;
 
             const isFavorite = favorites[symbol] ?? false;
 
             return (
               <TableRow key={name}>
-                <TableCell className="font-medium flex gap-5">
+                <TableCell className="flex gap-5">
                   <Heart
                     className="cursor-pointer"
                     onClick={() => toggleFavorite(symbol)}

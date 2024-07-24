@@ -6,7 +6,7 @@ import { Loader } from "lucide-react";
 import CryptoTable from "./CryptoTable";
 
 export default function CryptoDetails() {
-  const { cryptoData, apiState } = useCryptoData();
+  const { cryptoData, apiState, setCryptoData } = useCryptoData();
 
   if (apiState === "ERROR") {
     // Need to handle API Errors
@@ -20,7 +20,11 @@ export default function CryptoDetails() {
 
   return (
     <section className="p-6">
-      <CryptoTable columns={CRYPTO_TABLE.COLUMNS} data={cryptoData} />
+      <CryptoTable
+        columns={CRYPTO_TABLE.COLUMNS}
+        data={cryptoData}
+        setCryptoData={setCryptoData}
+      />
     </section>
   );
 }

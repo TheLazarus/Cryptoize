@@ -1,4 +1,9 @@
-import { ApiState, CryptoCurrency } from "@/app/types";
+import {
+  ApiState,
+  ColumnsToSort,
+  CryptoCurrency,
+  SortingOrder,
+} from "@/app/types";
 import { useEffect, useState } from "react";
 import { CRYPTO_DATA_URI } from "./constants";
 import { favoriteCryptoInLS, getFavorites } from "./utils";
@@ -22,7 +27,7 @@ export const usePagination = (totalPages: number) => {
     });
   };
 
-  return { currentPage, goToNextPage, goToPrevPage };
+  return { currentPage, goToNextPage, goToPrevPage, setCurrentPage };
 };
 
 export const useCryptoData = () => {
@@ -46,7 +51,7 @@ export const useCryptoData = () => {
     getCryptoData();
   }, []);
 
-  return { cryptoData, apiState };
+  return { cryptoData, apiState, setCryptoData };
 };
 
 export const useFavorites = () => {
@@ -62,4 +67,27 @@ export const useFavorites = () => {
   };
 
   return { favorites, toggleFavorite };
+};
+
+export const useSorting = () => {
+  const [currentColumn, setCurrentColumn] = useState<ColumnsToSort | null>(
+    null
+  );
+  const [currentOrder, setCurrentOrder] = useState<SortingOrder | null>(null);
+
+  const sortData = (column: ColumnsToSort, data: CryptoCurrency[]) => {
+    setCurrentColumn(column);
+
+    return data.toSorted((a, b) => {
+      if (currentOrder === null || currentOrder === "DECREASING") {
+        setCurrentOrder("INCREASING");
+        return a[column].charCodeAt(0) - b[column].charCodeAt(0);
+      }
+
+      setCurrentOrder("DECREASING");
+      return b[column].charCodeAt(0) - a[column].charCodeAt(0);
+    });
+  };
+
+  return { currentColumn, currentOrder, sortData };
 };
