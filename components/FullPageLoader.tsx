@@ -19,7 +19,7 @@ export default function FullPageLoader() {
 
   return (
     <main className="min-h-screen grid place-items-center">
-      <BitcoinIcon ref={loaderRef} size={40}/>
+      <BitcoinIcon ref={loaderRef} size={40} />
     </main>
   );
 }

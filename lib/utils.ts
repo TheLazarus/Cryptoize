@@ -68,7 +68,7 @@ export const getDataForLast30Days = (historyData: HistoryEntry[] | null) => {
   const length = historyData.length;
 
   return historyData.slice(length - 30, length).map((data) => ({
-    name: new Date(data.date).toLocaleDateString(),
+    date: new Date(data.date).toLocaleDateString(),
     price: Number(data.priceUsd),
   }));
 };

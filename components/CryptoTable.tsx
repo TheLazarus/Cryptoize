@@ -93,7 +93,7 @@ export default function CryptoTable({
           {dataToRender.map((data) => {
             const { id, symbol, name, priceUsd, marketCapUsd } = data || {};
 
-            const formattedPrice = `${parseFloat(priceUsd).toFixed(2)}`;
+            const formattedPrice = `${parseFloat(priceUsd).toFixed(4)}`;
             const formattedMarketCap = `${parseFloat(marketCapUsd).toFixed(4)}`;
 
             const isFavorite = favorites[symbol] ?? false;

@@ -21,6 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/favicon.ico" />
       <body className={font.className}>
         <Suspense fallback={<FullPageLoader />}>{children}</Suspense>
       </body>
