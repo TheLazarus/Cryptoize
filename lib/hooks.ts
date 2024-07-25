@@ -43,7 +43,7 @@ export const useCryptoData = () => {
     async function getCryptoData() {
       try {
         setApiState("LOADING");
-        const response = await fetch(CRYPTO_DATA_URI, { cache: "no-store" });
+        const response = await fetch(CRYPTO_DATA_URI);
         const parsedResponse = await response.json();
         const { data = [] } = parsedResponse || {};
         setCryptoData(data);
@@ -108,9 +108,7 @@ export const useCryptoHistory = (currency: string, interval: string) => {
       try {
         setApiState("LOADING");
         const response = await fetch(
-          getCryptoHistoryEndpoint(currency, interval),
-
-          { cache: "no-store" }
+          getCryptoHistoryEndpoint(currency, interval)
         );
         const parsedResponse = await response.json();
         const { data = [] } = parsedResponse || {};
