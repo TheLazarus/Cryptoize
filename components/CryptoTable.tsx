@@ -76,13 +76,19 @@ export default function CryptoTable({
                 >
                   {label}
                   {currentColumn !== value && (
-                    <MoveVertical className="absolute right-0 top-[50%]" size={15} />
+                    <MoveVertical
+                      className="absolute right-0 top-[50%]"
+                      size={15}
+                    />
                   )}
                   {currentColumn === value && currentOrder === "INCREASING" && (
                     <MoveUp className="absolute right-0 top-[50%]" size={15} />
                   )}
                   {currentColumn === value && currentOrder === "DECREASING" && (
-                    <MoveDown className="absolute right-0 top-[50%]" size={15}/>
+                    <MoveDown
+                      className="absolute right-0 top-[50%]"
+                      size={15}
+                    />
                   )}
                 </TableHead>
               );
@@ -119,6 +125,7 @@ export default function CryptoTable({
                   {formattedPrice}
                 </TableCell>
                 <TableCell className="text-right">
+                  <span className="font-bold">$</span>
                   {formattedMarketCap}
                 </TableCell>
               </TableRow>
