@@ -45,7 +45,7 @@ export default function Home() {
           <span ref={binRefTwo} className="text-red-400 inline-block">
             1
           </span>
-          ing
+          ze
           <p className="hidden md:inline-block" ref={dotRef}>
             .
           </p>
