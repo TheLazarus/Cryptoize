@@ -56,7 +56,7 @@ export default function Home() {
           />
         </h1>
         <h2 className="hidden md:block">
-          The place to track your favorite Cryptocurrencies!
+          Track Crypto with ease!
         </h2>
       </div>
 

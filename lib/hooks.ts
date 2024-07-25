@@ -141,7 +141,7 @@ export const useRealtimePrices = (
       const newPrices = JSON.parse(msg.data || "");
 
       setCryptoData((data) => {
-        if (!data) return data;
+        if(!data) return data;
 
         const updatedPrices = data.map((data) => {
           const { id, priceUsd } = data || {};
