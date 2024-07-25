@@ -93,14 +93,14 @@ export default function CryptoTable({
           {dataToRender.map((data) => {
             const { id, symbol, name, priceUsd, marketCapUsd } = data || {};
 
-            const formattedPrice = `${parseFloat(priceUsd).toFixed(4)}`;
+            const formattedPrice = `${parseFloat(priceUsd).toFixed(2)}`;
             const formattedMarketCap = `${parseFloat(marketCapUsd).toFixed(4)}`;
 
             const isFavorite = favorites[symbol] ?? false;
 
             return (
               <TableRow key={name}>
-                <TableCell className="flex gap-5 font-bold">
+                <TableCell className="flex gap-5">
                   <Heart
                     className="cursor-pointer"
                     onClick={() => toggleFavorite(symbol)}
@@ -109,13 +109,13 @@ export default function CryptoTable({
                   {symbol}
                 </TableCell>
 
-                <TableCell className="font-bold">
+                <TableCell>
                   <Link href={{ pathname: "/details", query: { id } }}>
                     {name}
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <span className="font-bold">$ </span>
+                  <span className="font-bold">$</span>
                   {formattedPrice}
                 </TableCell>
                 <TableCell className="text-right">

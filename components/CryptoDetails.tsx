@@ -2,18 +2,20 @@
 
 import { CRYPTO_TABLE } from "@/lib/constants";
 import { useCryptoData } from "@/lib/hooks";
-import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
 import CryptoTable from "./CryptoTable";
+import FullPageLoader from "./FullPageLoader";
 
 export default function CryptoDetails() {
   const { cryptoData, apiState, setCryptoData } = useCryptoData();
+  const router = useRouter();
 
   if (apiState === "ERROR") {
-    // Need to handle API Errors
+    router.push("/404");
   }
 
   if (apiState === "LOADING") {
-    return <Loader className="m-auto" />;
+    return <FullPageLoader />;
   }
 
   if (!cryptoData) return null;

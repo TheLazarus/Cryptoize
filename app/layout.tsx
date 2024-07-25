@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
+import FullPageLoader from "@/components/FullPageLoader";
 
-const font = JetBrains_Mono({ subsets: ["latin"], weight: ["100", "200", "300"] });
+const font = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["100", "200", "300"],
+});
 
 export const metadata: Metadata = {
   title: "Cryptoize",
@@ -18,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Suspense>{children}</Suspense>
+        <Suspense fallback={<FullPageLoader />}>{children}</Suspense>
       </body>
     </html>
   );
