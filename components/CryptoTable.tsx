@@ -76,13 +76,13 @@ export default function CryptoTable({
                 >
                   {label}
                   {currentColumn !== value && (
-                    <MoveVertical className="absolute right-0" />
+                    <MoveVertical className="absolute right-0 top-[50%]" size={15} />
                   )}
                   {currentColumn === value && currentOrder === "INCREASING" && (
-                    <MoveDown className="absolute right-0" />
+                    <MoveUp className="absolute right-0 top-[50%]" size={15} />
                   )}
                   {currentColumn === value && currentOrder === "DECREASING" && (
-                    <MoveUp className="absolute right-0" />
+                    <MoveDown className="absolute right-0 top-[50%]" size={15}/>
                   )}
                 </TableHead>
               );
