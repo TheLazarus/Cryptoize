@@ -12,6 +12,9 @@ const font = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Cryptoize",
   description: "Track your cryptocurrencies easily",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
