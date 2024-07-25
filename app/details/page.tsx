@@ -10,6 +10,7 @@ import {
   Legend,
   Line,
   LineChart,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -41,27 +42,27 @@ export default function CryptoDetails() {
         height={100}
         className="absolute h-full w-full opacity-5 left-0 object-cover"
       />
-      <h1 className="text-[2rem] text-center font-light md:text-[3rem]">
+      <h1 className="text-[1rem] text-center font-light md:text-[3rem]">
         Price Movement of{" "}
         <span className="font-extralight p-2 bg-black text-white">
           {id.toUpperCase()}
         </span>
       </h1>
 
-      <div className="grid place-items-center">
-        <LineChart
-          width={1400}
-          height={500}
-          data={last30DaysData}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis label={{ value: "Price", angle: -90, position: "left" }} />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="price" stroke="#8884d8" />
-        </LineChart>
+      <div className="grid place-items-center pt-8">
+        <ResponsiveContainer>
+          <LineChart
+            data={last30DaysData}
+            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis label={{ value: "Price", angle: -90, position: "left" }} />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="price" stroke="#8884d8" />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     </main>
   );
