@@ -6,7 +6,7 @@ import {
   useRealtimePrices,
   useSorting,
 } from "@/lib/hooks";
-import { getPaginatedData } from "@/lib/utils";
+import { cn, getPaginatedData } from "@/lib/utils";
 import {
   ChevronLeft,
   ChevronRight,
@@ -97,7 +97,8 @@ export default function CryptoTable({
         </TableHeader>
         <TableBody>
           {dataToRender.map((data) => {
-            const { id, symbol, name, priceUsd, marketCapUsd } = data || {};
+            const { id, symbol, name, priceUsd, marketCapUsd, flow } =
+              data || {};
 
             const formattedPrice = `${parseFloat(priceUsd).toFixed(4)}`;
             const formattedMarketCap = `${parseFloat(marketCapUsd).toFixed(4)}`;
@@ -120,7 +121,12 @@ export default function CryptoTable({
                     {name}
                   </Link>
                 </TableCell>
-                <TableCell>
+                <TableCell
+                  className={cn({
+                    "animate-greenup": flow === "inc",
+                    "animate-redup": flow === "dec",
+                  })}
+                >
                   <span className="font-bold">$</span>
                   {formattedPrice}
                 </TableCell>

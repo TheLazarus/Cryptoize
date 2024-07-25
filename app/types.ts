@@ -13,6 +13,7 @@ export type CryptoCurrency = {
   changePercent24Hr: string;
   vwap24Hr: string;
   explorer: string;
+  flow: "inc" | "dec" | null;
 };
 
 export type CryptoTableProps = {

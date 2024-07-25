@@ -144,13 +144,18 @@ export const useRealtimePrices = (
         if (!data) return data;
 
         const updatedPrices = data.map((data) => {
-          const { id } = data || {};
+          const { id, priceUsd } = data || {};
 
-          if (!newPrices[id]) return data;
+          if (!newPrices[id])
+            return {
+              ...data,
+              flow: null,
+            };
 
           return {
             ...data,
             priceUsd: newPrices[id],
+            flow: priceUsd >= newPrices[id] ? "dec" : "inc",
           };
         });
         return updatedPrices;
