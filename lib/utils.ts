@@ -56,7 +56,7 @@ export const getFavorites = () => {
 };
 
 export const getCryptoHistoryEndpoint = (
-currency: string,
+  currency: string,
   interval: string
 ) => {
   return `https://api.coincap.io/v2/assets/${currency}/history?interval=${interval}`;
