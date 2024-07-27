@@ -36,7 +36,11 @@ export default function CryptoTable({
   const { favorites, toggleFavorite } = useFavorites();
   const { currentColumn, currentOrder, sortData } = useSorting();
 
-  const dataToRender = getPaginatedData(data, currentPage, CRYPTO_TABLE.PAGE_LIMIT);
+  const dataToRender = getPaginatedData(
+    data,
+    currentPage,
+    CRYPTO_TABLE.PAGE_LIMIT
+  );
   const showPrevButton = currentPage > 0;
   const showNextButton = currentPage < CRYPTO_TABLE.TOTAL_PAGES - 1;
 
@@ -44,16 +48,6 @@ export default function CryptoTable({
 
   return (
     <div>
-      <div className="flex justify-end">
-        <div className="flex gap-4">
-          <button onClick={goToPrevPage} disabled={!showPrevButton}>
-            <ChevronLeft stroke={showPrevButton ? "black" : "gray"} />
-          </button>
-          <button onClick={goToNextPage} disabled={!showNextButton}>
-            <ChevronRight stroke={showNextButton ? "black" : "gray"} />
-          </button>
-        </div>
-      </div>
       <Table>
         <TableHeader>
           <TableRow>
@@ -139,6 +133,19 @@ export default function CryptoTable({
           })}
         </TableBody>
       </Table>
+      <div className="flex justify-between">
+        <span>
+          Page {currentPage + 1} out of {CRYPTO_TABLE.TOTAL_PAGES}
+        </span>
+        <div className="flex gap-4">
+          <button onClick={goToPrevPage} disabled={!showPrevButton}>
+            <ChevronLeft stroke={showPrevButton ? "black" : "gray"} />
+          </button>
+          <button onClick={goToNextPage} disabled={!showNextButton}>
+            <ChevronRight stroke={showNextButton ? "black" : "gray"} />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

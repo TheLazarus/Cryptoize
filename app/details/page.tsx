@@ -34,7 +34,7 @@ export default function CryptoDetails() {
   }
 
   return (
-    <main className="min-h-screen grid justify-center p-10 relative">
+    <main className="min-h-screen grid  p-10 relative">
       <Image
         src={"/ethereum.svg"}
         alt=""
@@ -50,7 +50,7 @@ export default function CryptoDetails() {
       </h1>
 
       <div className="grid place-items-center pt-8">
-        <ResponsiveContainer>
+        <ResponsiveContainer className={"tableContainer"}>
           <LineChart
             data={last30DaysData}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
