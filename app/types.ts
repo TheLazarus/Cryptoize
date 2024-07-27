@@ -6,14 +6,14 @@ export type CryptoCurrency = {
   symbol: string;
   name: string;
   supply: string;
-  maxSupply: string;
+  maxSupply: string | null;
   marketCapUsd: string;
   volumeUsd24Hr: string;
   priceUsd: string;
   changePercent24Hr: string;
   vwap24Hr: string;
-  explorer: string;
-  flow: string | null;
+  explorer?: string;
+  flow?: string | null;
 };
 
 export type CryptoTableProps = {

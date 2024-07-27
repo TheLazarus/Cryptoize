@@ -36,7 +36,7 @@ export default function CryptoTable({
   const { favorites, toggleFavorite } = useFavorites();
   const { currentColumn, currentOrder, sortData } = useSorting();
 
-  const dataToRender = getPaginatedData(data, currentPage);
+  const dataToRender = getPaginatedData(data, currentPage, CRYPTO_TABLE.PAGE_LIMIT);
   const showPrevButton = currentPage > 0;
   const showNextButton = currentPage < CRYPTO_TABLE.TOTAL_PAGES - 1;
 

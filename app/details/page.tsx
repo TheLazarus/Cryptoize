@@ -2,7 +2,7 @@
 
 import FullPageLoader from "@/components/FullPageLoader";
 import { useCryptoHistory } from "@/lib/hooks";
-import { getDataForLast30Days } from "@/lib/utils";
+import { getDataForLastNDays } from "@/lib/utils";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -23,7 +23,7 @@ export default function CryptoDetails() {
   const router = useRouter();
 
   const { apiState, cryptoHistoryData } = useCryptoHistory(id, "d1");
-  const last30DaysData = getDataForLast30Days(cryptoHistoryData);
+  const last30DaysData = getDataForLastNDays(cryptoHistoryData, 30);
 
   if (apiState === "ERROR") {
     router.push("/404");

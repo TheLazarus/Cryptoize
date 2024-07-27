@@ -1,7 +1,7 @@
 import { CryptoCurrency, HistoryEntry } from "@/app/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { CRYPTO_TABLE, CRYPTO_FAVORITES_LS_KEY } from "./constants";
+import { CRYPTO_FAVORITES_LS_KEY } from "./constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -9,12 +9,13 @@ export function cn(...inputs: ClassValue[]) {
 
 export const getPaginatedData = (
   data: CryptoCurrency[],
-  currentPage: number
+  currentPage: number,
+  limit: number
 ): CryptoCurrency[] => {
-  const startingItemIndex = currentPage * CRYPTO_TABLE.PAGE_LIMIT;
+  const startingItemIndex = currentPage * limit;
   const paginatedData = data.slice(
     startingItemIndex,
-    startingItemIndex + CRYPTO_TABLE.PAGE_LIMIT
+    startingItemIndex + limit
   );
 
   return paginatedData;
@@ -62,12 +63,15 @@ export const getCryptoHistoryEndpoint = (
   return `https://api.coincap.io/v2/assets/${currency}/history?interval=${interval}`;
 };
 
-export const getDataForLast30Days = (historyData: HistoryEntry[] | null) => {
+export const getDataForLastNDays = (
+  historyData: HistoryEntry[] | null,
+  days: number
+) => {
   if (!historyData || !historyData.length) return [];
 
   const length = historyData.length;
 
-  return historyData.slice(length - 30, length).map((data) => ({
+  return historyData.slice(length - days, length).map((data) => ({
     date: new Date(data.date).toLocaleDateString(),
     price: Number(data.priceUsd),
   }));
