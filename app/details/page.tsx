@@ -60,7 +60,7 @@ export default function CryptoDetails() {
             <YAxis label={{ value: "Price", angle: -90, position: "left" }} />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="price" stroke="#8884d8" />
+            <Line type="monotone" dataKey="Price" stroke="#8884d8" />
           </LineChart>
         </ResponsiveContainer>
       </div>

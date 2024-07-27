@@ -73,6 +73,6 @@ export const getDataForLastNDays = (
 
   return historyData.slice(length - days, length).map((data) => ({
     date: new Date(data.date).toLocaleDateString(),
-    price: Number(data.priceUsd),
+    Price: Number(data.priceUsd).toFixed(2),
   }));
 };
