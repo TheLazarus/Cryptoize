@@ -6,7 +6,7 @@ import {
   useRealtimePrices,
   useSorting,
 } from "@/lib/hooks";
-import { cn, getPaginatedData } from "@/lib/utils";
+import { cn, getFormattedPrice, getPaginatedData } from "@/lib/utils";
 import {
   ChevronLeft,
   ChevronRight,
@@ -94,8 +94,8 @@ export default function CryptoTable({
             const { id, symbol, name, priceUsd, marketCapUsd, flow } =
               data || {};
 
-            const formattedPrice = `${parseFloat(priceUsd).toFixed(2)}`;
-            const formattedMarketCap = `${parseFloat(marketCapUsd).toFixed(2)}`;
+            const formattedPrice = getFormattedPrice(priceUsd);
+            const formattedMarketCap = getFormattedPrice(marketCapUsd);
 
             const isFavorite = favorites[symbol] ?? false;
 

@@ -93,3 +93,11 @@ export const getFlow = (
 
   return null;
 };
+
+export const getFormattedPrice = (price: string): string => {
+  const formattedPrice = `${Number(
+    parseFloat(price).toFixed(2)
+  ).toLocaleString()}`;
+
+  return formattedPrice;
+};
