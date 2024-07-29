@@ -76,3 +76,20 @@ export const getDataForLastNDays = (
     Price: Number(data.priceUsd).toFixed(2),
   }));
 };
+
+export const getFlow = (
+  oldPrice: number,
+  newPrice: number,
+  lim: number
+): "inc" | "dec" | null => {
+  if (oldPrice === newPrice) return null;
+
+  if (Math.abs(oldPrice - newPrice) >= lim && oldPrice < newPrice) {
+    return "inc";
+  }
+  if (Math.abs(oldPrice - newPrice) >= lim && newPrice < oldPrice) {
+    return "dec";
+  }
+
+  return null;
+};

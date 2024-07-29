@@ -11,6 +11,7 @@ import {
   favoriteCryptoInLS,
   getCryptoHistoryEndpoint,
   getFavorites,
+  getFlow,
 } from "./utils";
 
 export const usePagination = (totalPages: number) => {
@@ -155,7 +156,7 @@ export const useRealtimePrices = (
           return {
             ...data,
             priceUsd: newPrices[id],
-            flow: priceUsd >= newPrices[id] ? "dec" : "inc",
+            flow: getFlow(Number(priceUsd), newPrices[id], 0.01),
           };
         });
         return updatedPrices;

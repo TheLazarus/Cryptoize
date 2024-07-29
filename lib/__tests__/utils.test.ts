@@ -33,7 +33,6 @@ describe("Unit tests on the utils", () => {
   it("Should return the correct favorites data", () => {
     jest.spyOn(Storage.prototype, "getItem").mockReturnValue('{"btc":true}');
     const favorites = getFavorites();
-    console.log(favorites);
     expect(JSON.stringify(favorites)).toBe('{"btc":true}');
   });
 

@@ -94,8 +94,8 @@ export default function CryptoTable({
             const { id, symbol, name, priceUsd, marketCapUsd, flow } =
               data || {};
 
-            const formattedPrice = `${parseFloat(priceUsd).toFixed(4)}`;
-            const formattedMarketCap = `${parseFloat(marketCapUsd).toFixed(4)}`;
+            const formattedPrice = `${parseFloat(priceUsd).toFixed(2)}`;
+            const formattedMarketCap = `${parseFloat(marketCapUsd).toFixed(2)}`;
 
             const isFavorite = favorites[symbol] ?? false;
 
