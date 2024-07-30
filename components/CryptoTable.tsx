@@ -133,7 +133,7 @@ export default function CryptoTable({
           })}
         </TableBody>
       </Table>
-      <div className="flex justify-between">
+      <div className="flex justify-between mt-8">
         <span>
           Page {currentPage + 1} out of {CRYPTO_TABLE.TOTAL_PAGES}
         </span>
