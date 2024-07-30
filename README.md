@@ -34,7 +34,7 @@ The main functionality and logic responsible for making API calls, sorting data,
 
 To spin up the local development server, the following command can be used -
 
-`npm dev`
+`npm run dev`
 
 To run unit tests, following can be used -
 

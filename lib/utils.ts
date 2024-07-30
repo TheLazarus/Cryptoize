@@ -73,7 +73,7 @@ export const getDataForLastNDays = (
 
   return historyData.slice(length - days, length).map((data) => ({
     date: new Date(data.date).toLocaleDateString(),
-    Price: Number(data.priceUsd).toFixed(2),
+    Price: Number(data.priceUsd).toFixed(6),
   }));
 };
 
@@ -95,9 +95,7 @@ export const getFlow = (
 };
 
 export const getFormattedPrice = (price: string): string => {
-  const formattedPrice = `${Number(
-    parseFloat(price).toFixed(2)
-  ).toLocaleString()}`;
+  const formattedPrice = parseFloat(price).toFixed(6);
 
   return formattedPrice;
 };

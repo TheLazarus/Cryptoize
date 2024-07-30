@@ -156,7 +156,7 @@ export const useRealtimePrices = (
           return {
             ...data,
             priceUsd: newPrices[id],
-            flow: getFlow(Number(priceUsd), newPrices[id], 0.01),
+            flow: getFlow(Number(priceUsd), newPrices[id], 0.00001),
           };
         });
         return updatedPrices;
