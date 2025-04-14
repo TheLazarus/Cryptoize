@@ -18,8 +18,8 @@ export async function GET(request: NextRequest) {
 
     const apiEndpoint = process.env.COINCAP_API_ENDPOINT!;
     interval;
-    const requestUri = `${apiEndpoint}?apiKey=${process.env
-      .COINCAP_API_KEY!}&currency=${currency}&interval=${interval}`;
+    const requestUri = `${apiEndpoint}/${currency}/history?apiKey=${process.env
+      .COINCAP_API_KEY!}&interval=${interval}`;
     const response = await fetch(requestUri);
     const jsonParsedResponse = await response.json();
 
