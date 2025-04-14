@@ -11,6 +11,9 @@ export const CRYPTO_TABLE = {
 
 export const CRYPTO_FAVORITES_LS_KEY = "cc_favorites";
 
-export const CRYPTO_DATA_URI = "https://rest.coincap.io/v3/assets";
+export const API_ROUTES = {
+  GET_CRYPTO_DATA: "/api/getCryptoData",
+  GET_CRYPTO_HISTORY: "/api/getCryptoHistory",
+};
 
 export const CRYPTO_WS_URI = "wss://wss.coincap.io/prices";

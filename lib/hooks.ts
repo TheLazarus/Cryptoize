@@ -6,7 +6,7 @@ import {
   SortingOrder,
 } from "@/app/types";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { CRYPTO_DATA_URI, CRYPTO_WS_URI } from "./constants";
+import { API_ROUTES, CRYPTO_WS_URI } from "./constants";
 import {
   favoriteCryptoInLS,
   getCryptoHistoryEndpoint,
@@ -44,11 +44,7 @@ export const useCryptoData = () => {
     async function getCryptoData() {
       try {
         setApiState("LOADING");
-        const response = await fetch(CRYPTO_DATA_URI, {
-          headers: {
-            apiKey: process.env.NEXT_PUBLIC_API_KEY!,
-          },
-        });
+        const response = await fetch(API_ROUTES.GET_CRYPTO_DATA);
         const parsedResponse = await response.json();
         const { data = [] } = parsedResponse || {};
         setCryptoData(data);
@@ -113,15 +109,9 @@ export const useCryptoHistory = (currency: string, interval: string) => {
       try {
         setApiState("LOADING");
         const response = await fetch(
-          getCryptoHistoryEndpoint(currency, interval),
-          {
-            headers: {
-              apiKey: process.env.NEXT_PUBLIC_API_KEY!,
-            },
-          }
+          getCryptoHistoryEndpoint(currency, interval)
         );
         const parsedResponse = await response.json();
-        console.log("++parse response", parsedResponse);
         const { data = [] } = parsedResponse || {};
         setCryptoHistoryData(data);
         setApiState("SUCCESS");
