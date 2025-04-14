@@ -44,7 +44,11 @@ export const useCryptoData = () => {
     async function getCryptoData() {
       try {
         setApiState("LOADING");
-        const response = await fetch(CRYPTO_DATA_URI);
+        const response = await fetch(CRYPTO_DATA_URI, {
+          headers: {
+            apiKey: process.env.NEXT_PUBLIC_API_KEY!,
+          },
+        });
         const parsedResponse = await response.json();
         const { data = [] } = parsedResponse || {};
         setCryptoData(data);
@@ -109,9 +113,15 @@ export const useCryptoHistory = (currency: string, interval: string) => {
       try {
         setApiState("LOADING");
         const response = await fetch(
-          getCryptoHistoryEndpoint(currency, interval)
+          getCryptoHistoryEndpoint(currency, interval),
+          {
+            headers: {
+              apiKey: process.env.NEXT_PUBLIC_API_KEY!,
+            },
+          }
         );
         const parsedResponse = await response.json();
+        console.log("++parse response", parsedResponse);
         const { data = [] } = parsedResponse || {};
         setCryptoHistoryData(data);
         setApiState("SUCCESS");

@@ -6,13 +6,13 @@ import {
   getFavorites,
   getPaginatedData,
 } from "../utils";
-import { CRYPTO_FAVORITES_LS_KEY } from "../constants";
+import { CRYPTO_DATA_URI, CRYPTO_FAVORITES_LS_KEY } from "../constants";
 
 describe("Unit tests on the utils", () => {
   it("Should get the correct history endpoint", () => {
     const endpoint = getCryptoHistoryEndpoint("bitcoin", "d2");
     expect(endpoint).toBe(
-      `https://api.coincap.io/v2/assets/bitcoin/history?interval=d2`
+      `${CRYPTO_DATA_URI}/bitcoin/history?interval=d2`
     );
   });
   it("Should return the correct output for getDataForLastNDays", () => {

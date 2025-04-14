@@ -1,7 +1,7 @@
 import { CryptoCurrency, HistoryEntry } from "@/app/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { CRYPTO_FAVORITES_LS_KEY } from "./constants";
+import { CRYPTO_DATA_URI, CRYPTO_FAVORITES_LS_KEY } from "./constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -60,7 +60,7 @@ export const getCryptoHistoryEndpoint = (
   currency: string,
   interval: string
 ) => {
-  return `https://api.coincap.io/v2/assets/${currency}/history?interval=${interval}`;
+  return `${CRYPTO_DATA_URI}/v3/assets/${currency}/history?interval=${interval}`;
 };
 
 export const getDataForLastNDays = (
